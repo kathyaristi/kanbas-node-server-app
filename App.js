@@ -1,21 +1,30 @@
 import express from "express";
 import Hello from "./hello.js";
+import Lab5 from "./Lab5.js";
+import cors from "cors";
+import CourseRoutes from "./Kanbas/courses/routes.js";
+import ModuleRoutes from "./Kanbas/modules/routes.js";
 
 //const express = require("express") //require means import
 // import CourseRoutes from "./Courses/routes.js"
-// import cors from "cors"
 // import mongoose from "mongoose"
 
 const app = express();
+app.use(cors()); // allow anything to come in from anywhere
+app.use(express.json());
+
+CourseRoutes(app);
+ModuleRoutes(app);
+
+
 Hello(app)
-app.listen(4000)
+Lab5(app);
+app.listen(process.env.PORT || 4000);
 
 
 
 // mongoose.connect("mongodb://localhost:27017/kanban-sp24-wed")
 
-// app.use(cors()); // allow anything to come in from anywhere
-// app.use(express.json());
 // app.use(session({
 //     secret: "secret",
 //     resave: false,
