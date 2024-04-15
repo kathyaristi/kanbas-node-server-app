@@ -16,6 +16,7 @@ const assignment = {
     { id: 3, title: "Task 3", completed: false },
     { id: 4, title: "Task 4", completed: true },
   ];
+
   const Lab5 = (app) => {
     app.get("/a5/todos", (req, res) => {
       const { completed } = req.query;
