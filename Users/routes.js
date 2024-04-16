@@ -4,7 +4,6 @@ export default function UserRoutes(app) {
     const user = await dao.createUser(req.body);
     res.json(user);
   };
-  app.post("/api/users", createUser);
   const deleteUser = async (req, res) => {
     const status = await dao.deleteUser(req.params.userId);
     res.json(status);
@@ -32,6 +31,7 @@ const findAllUsers = async (req, res) => {
     res.json(status);
   };
   const signup = async (req, res) => {
+    console.log(req.sesssion.id);
     const user = await dao.findUserByUsername(req.body.username);
     if (user) {
       res.status(400).json(
@@ -44,6 +44,7 @@ const findAllUsers = async (req, res) => {
   app.post("/api/users/signup", signup);
 
   const signin = async (req, res) => {
+    console.log(req.session.id);
 
     const { username, password } = req.body;
     const currentUser = await dao.findUserByCredentials(username, password);
@@ -58,9 +59,8 @@ const findAllUsers = async (req, res) => {
    };
 
 const signout = (req, res) => {
-  req.session.destroy();
-
-    currentUser = null;
+    console.log(req.session["currentUser"]);
+    req.session.destroy();
     res.sendStatus(200);
   };
   app.post("/api/users/signout", signout);
