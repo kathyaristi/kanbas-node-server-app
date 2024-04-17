@@ -31,7 +31,6 @@ const findAllUsers = async (req, res) => {
     res.json(status);
   };
   const signup = async (req, res) => {
-    console.log(req.sesssion.id);
     const user = await dao.findUserByUsername(req.body.username);
     if (user) {
       res.status(400).json(
