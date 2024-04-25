@@ -43,5 +43,8 @@ export default function CourseRoutes(app) {
     res.send(course);
   });
 
-
+  app.post("/rest/tuits", (req, res) => {
+    const tuits = req.body;
+    res.send(tuits);
+ });
 }
