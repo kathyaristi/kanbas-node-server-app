@@ -14,12 +14,11 @@ mongoose.connect(CONNECTION_STRING,{
     socketTimeoutMS: 30000,
 });
 
-const app = express();// 
+const app = express();
 app.use(
     cors({
       credentials: true,
       origin: process.env.FRONTEND_URL,
-
     })
    );
 

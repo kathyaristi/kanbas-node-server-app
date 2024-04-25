@@ -2,9 +2,18 @@ import * as dao from "./dao.js";
 export default function UserRoutes(app) {
   
   const createUser = async (req, res) => {
+    let existingUser = await dao.findUserByUsername(req.body.username);
+    // console.log("in existing", user)
+
+    if(existingUser){
+      console.log("incase", existingUser)
+      res.status(400).json(
+        { message: "Username already taken" });
+    }
     const user = await dao.createUser(req.body);
     res.json(user);
   };
+
   const deleteUser = async (req, res) => {
     const status = await dao.deleteUser(req.params.userId);
     res.json(status);
